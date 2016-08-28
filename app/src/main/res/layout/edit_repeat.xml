@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/round_rect"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:text="选择重复"
+    android:textColor="@android:color/black"
+    android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_red_light"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="不重复"
+        android:id="@+id/repeat_no"
+        android:background="@drawable/press"
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="每天重复"
+        android:id="@+id/repeat_1"
+
+        android:background="@drawable/press"
+
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="每周重复"
+        android:id="@+id/repeat_7"
+
+        android:background="@drawable/press"
+
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="每两周重复"
+        android:id="@+id/repeat_14"
+
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="每月重复"
+        android:id="@+id/repeat_30"
+
+        android:background="@drawable/press"
+
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="每年重复"
+        android:id="@+id/repeat_365"
+
+        android:background="@drawable/press"
+
+        android:gravity="center"/>
+
+
+</LinearLayout>

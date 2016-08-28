@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+
+    android:layout_width="match_parent"
+    android:background="@drawable/press"
+    android:layout_height="60dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+<FrameLayout
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:layout_marginLeft="10dp">
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/work"
+        android:id="@+id/day_plan_item_image"
+        android:layout_gravity="center"/>
+</FrameLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="11:10"
+            android:id="@+id/day_plan_item_time_up"
+            android:gravity="center|bottom"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="23:30"
+            android:id="@+id/day_plan_item_time_dowm"
+            android:gravity="center|top"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="啊哈哈哈哈"
+        android:gravity="center|left"
+        android:id="@+id/day_plan_item_text"
+        android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line"
+        android:layout_gravity="bottom"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line"
+        android:layout_gravity="top"/>
+</FrameLayout>

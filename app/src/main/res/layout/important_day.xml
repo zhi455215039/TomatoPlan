@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:orientation="horizontal">
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/impor_frame"
+        android:visibility="gone">
+        <com.firstapp.steven.mishu.EditDay.MyButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:id="@+id/impor_delete_button"/>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <FrameLayout
+            android:layout_width="59dp"
+            android:layout_height="59dp">
+    <com.firstapp.steven.mishu.UserIcon
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+
+        android:layout_gravity="center"
+        android:id="@+id/_icon"/>
+        </FrameLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:text="第300天"
+        android:id="@+id/impor_day_num"
+        android:textColor="@android:color/holo_purple"
+        android:paddingTop="5dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生日管家"
+            android:textSize="18dp"
+            android:textColor="@android:color/black"
+            android:paddingTop="6dp"
+            android:id="@+id/important_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016年8月21"
+            android:id="@+id/important_date"
+            android:textSize="13dp"
+            android:paddingBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="46"
+            android:id="@+id/importantday_num"
+            android:textSize="25dp"
+            android:gravity="left"
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天"
+            android:textSize="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/holo_red_dark"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="后过周年纪念"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="40dp"
+            android:textSize="13dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/importantday_content"
+            android:layout_alignTop="@+id/day_num" />
+    </RelativeLayout>
+</FrameLayout>
+    </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/line"/>
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/round_rect">
+
+<ImageView
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:src="@drawable/work"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center|left"
+    android:id="@+id/editday_add_item_image"
+
+    android:scaleType="fitCenter"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="工作"
+        android:textSize="20dp"
+        android:paddingLeft="60dp"
+        android:singleLine="true"
+        android:id="@+id/editday_add_item_text"
+
+        android:gravity="center|left"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/delete"
+        android:scaleType="fitCenter"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/editday_add_item_del"
+        android:layout_gravity="end|center"/>
+</FrameLayout>

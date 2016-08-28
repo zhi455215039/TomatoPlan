@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#0dc1f8</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="press">#0B000000</color>
+    <color name="line">#1f000000</color>
+    <color name="blue">#2f39c3dc</color>
+    <color name="month_line">#3f000000</color>
+    <color name="today">#8f39c3dc</color>
+    <color name="note_background">#f6f2e2</color>
+</resources>

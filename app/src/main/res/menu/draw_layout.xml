@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/menu_group_1">
+        <item
+            android:id="@+id/menu_feed"
+            android:icon="@drawable/ic_action_plan"
+            android:title="我的新计划" />
+        <item
+            android:id="@+id/birthday"
+            android:icon="@drawable/five"
+            android:title="生日" />
+        <item
+            android:id="@+id/importantday"
+            android:icon="@drawable/jinianri"
+            android:title="纪念日" />
+        <item
+            android:id="@+id/menu_news"
+            android:icon="@drawable/ic_action_beiwang"
+            android:title="我的备忘" />
+        </group>
+    <group>
+        <item
+            android:id="@+id/menu_popular"
+            android:icon="@drawable/action_no"
+            android:title="番茄统计数据" />
+        <item
+            android:id="@+id/menu_photos_nearby"
+            android:icon="@drawable/action_no"
+            android:title="番茄计划" />
+        <item
+            android:id="@+id/menu_photo_you_liked"
+            android:icon="@drawable/action_no"
+            android:title="云同步" />
+    </group>
+</menu>

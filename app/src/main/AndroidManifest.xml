@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.firstapp.steven.mishu">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:windowSoftInputMode="stateHidden|adjustPan"
+            android:name=".EditDay.EditDayActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.editdayactivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".EditDay.BirthdayActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.editdayactivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".EditDay.ImportantActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.importantactivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:name=".EditDay.EditBirthdayActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.editbirthdaydayactivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:windowSoftInputMode="stateHidden|adjustPan"
+            android:name=".EditDay.EditImportantActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.editimportantdayactivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/CropTheme"
+            android:name="com.soundcloud.android.crop.CropImageActivity" />
+      <service android:name=".service.BirthdayNotificationService"/>
+        <service android:name=".service.ImportantNotificationService"/>
+        <activity android:windowSoftInputMode="stateHidden|adjustPan"
+            android:name=".note.NoteActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.noteactivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

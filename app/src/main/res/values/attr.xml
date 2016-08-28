@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Item">
+        <attr name="image_src"
+            format="reference">
+
+        </attr>
+        <attr name="textview_text"
+            format="string"/>
+<attr name="item_id"
+    format="integer"/>
+    </declare-styleable>
+</resources>

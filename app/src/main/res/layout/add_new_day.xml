@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+
+
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id="@+id/add_new_p"
+        android:layout_gravity="center">
+<ImageView
+    android:layout_width="30dp"
+    android:layout_height="match_parent"
+    android:src="@drawable/health"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="添加新日程"
+        android:textColor="@android:color/holo_blue_light"
+        android:gravity="center|left"/>
+    </LinearLayout>
+</FrameLayout>
