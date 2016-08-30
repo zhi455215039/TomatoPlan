@@ -183,6 +183,7 @@ recyclerView.setVisibility(GONE);
                     right.setTranslationX(right.getTranslationX()+translate);
                     middle.setTranslationX(middle.getTranslationX()+translate);
                     recyclerView.setTranslationX(recyclerView.getTranslationX()+translate);
+                    add_new_day.setTranslationX(add_new_day.getTranslationX()+translate);
                     pressX=x;
                     break;
                 case MotionEvent.ACTION_UP:
@@ -258,6 +259,8 @@ if(firstX!=0&&Math.abs(ev.getX()-firstX)>slop)
                     left.closeCalendar();
                     add_new_day.setVisibility(GONE);
                    // recyclerView.setVisibility(GONE);
+                    add_new_day.setTranslationX(0);
+
                 }
 
 
@@ -318,6 +321,7 @@ if(firstX!=0&&Math.abs(ev.getX()-firstX)>slop)
                     right.closeCalendar();
                    // recyclerView.setVisibility(GONE);
                     add_new_day.setVisibility(GONE);
+                    add_new_day.setTranslationX(0);
                 }
 
                 @Override

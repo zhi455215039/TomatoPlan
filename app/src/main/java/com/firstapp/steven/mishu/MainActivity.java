@@ -105,6 +105,9 @@ myCalendarView= (MyCalendarView) findViewById(R.id.my_calendar);
                     case R.id.menu_news:
                         Intent intent3=new Intent(MainActivity.this, NoteActivity.class);
                         startActivity(intent3);
+                    case R.id.menu_popular:
+                        Intent intent4=new Intent(MainActivity.this,TomatoActivity.class);
+                        startActivity(intent4);
                         break;
                 }
                 drawerLayout.closeDrawers();

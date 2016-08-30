@@ -51,7 +51,7 @@ private Paint whiteBack;
     public MyButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         Random random=new Random(System.currentTimeMillis());
-        color=Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255));
+        color=Color.rgb(random.nextInt(250),random.nextInt(250),random.nextInt(250));
         circle=new Paint(Paint.ANTI_ALIAS_FLAG);
         circle.setStyle(Paint.Style.STROKE);
         circle.setColor(Color.GRAY);

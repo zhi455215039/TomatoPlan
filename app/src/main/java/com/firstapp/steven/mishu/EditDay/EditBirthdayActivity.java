@@ -29,6 +29,7 @@ import com.firstapp.steven.mishu.PictureDialog;
 import com.firstapp.steven.mishu.R;
 import com.firstapp.steven.mishu.UserIcon;
 import com.firstapp.steven.mishu.data.Birthday;
+import com.firstapp.steven.tomato.Tomato;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.L;
@@ -67,6 +68,7 @@ public class EditBirthdayActivity extends AppCompatActivity {
     HashSet<String> notify_days;
     Calendar lunar;
     TextView birthday_of_this_year;
+    ImageView imageView;
     File f;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +94,23 @@ public class EditBirthdayActivity extends AppCompatActivity {
         notify= (TextView) findViewById(R.id.edit_notify);
         relationship= (EditText) findViewById(R.id.edit_guanxi);
         birthday_of_this_year= (TextView) findViewById(R.id.birthday_this_year);
+        imageView= (ImageView) findViewById(R.id.edit_birthday_send);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(phoneNum.getText().toString().equals(""))
+                    Toast.makeText(EditBirthdayActivity.this,"请输入手机",Toast.LENGTH_SHORT).show();
+                else {
+                    String s=phoneNum.getText().toString();
+                   Intent intent=new Intent();
+                    intent.setAction(Intent.ACTION_SENDTO);
+                    //需要发短息的号码,电话号码之间用“;”隔开
+                    intent.setData(Uri.parse("smsto:"+s+";"));
+                    intent.putExtra("sms_body", "");
+                    startActivity(intent);
+                }
+            }
+        });
         boy.single.clear();
         boy.single.add(boy);
         boy.single.add(girl);

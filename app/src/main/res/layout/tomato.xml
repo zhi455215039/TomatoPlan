@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/tomato_frame"
+    android:background="@color/tomato_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/tomato_set"
+        android:src="@drawable/ic_action_menu"
+        android:scaleType="fitCenter"/>
+<com.firstapp.steven.mishu.TomatoButton
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:layout_gravity="center|top"
+    android:layout_marginTop="100dp"
+
+
+    android:gravity="center"
+    android:textColor="@android:color/white"
+    android:textSize="40dp"
+    android:id="@+id/tomato_button"/>
+
+    <com.firstapp.steven.tomato.ShowTomato
+        android:layout_width="310dp"
+        android:layout_height="310dp"
+        android:layout_gravity="center|top"
+        android:visibility="invisible"
+        android:layout_marginTop="70dp"
+       android:id="@+id/showTomato"
+
+        android:gravity="center"
+
+        />
+
+</FrameLayout>

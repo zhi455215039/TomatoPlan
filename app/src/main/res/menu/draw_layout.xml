@@ -21,15 +21,12 @@
     <group>
         <item
             android:id="@+id/menu_popular"
-            android:icon="@drawable/action_no"
-            android:title="番茄统计数据" />
+            android:icon="@drawable/tomato"
+            android:title="番茄时钟" />
         <item
             android:id="@+id/menu_photos_nearby"
-            android:icon="@drawable/action_no"
-            android:title="番茄计划" />
-        <item
-            android:id="@+id/menu_photo_you_liked"
-            android:icon="@drawable/action_no"
-            android:title="云同步" />
+            android:icon="@drawable/ic_action_tongji"
+            android:title="番茄统计" />
+
     </group>
 </menu>

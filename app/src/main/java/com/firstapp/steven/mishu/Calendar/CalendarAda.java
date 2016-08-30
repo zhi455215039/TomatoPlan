@@ -69,15 +69,18 @@ final Day_item item=list.get(holder.getAdapterPosition());
         }
         if(item.isFinish())
             holder.textView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        else holder.textView.getPaint().setFlags(0);
         Calendar calendar1=Calendar.getInstance();
         Calendar calendar11=Calendar.getInstance();
         Calendar calendar12=Calendar.getInstance();
         calendar11.set(item.getYear(),item.getMonth()-1,item.getDay(),item.getFromHour(),item.getFromMinute(),0);
         if(calendar11.getTimeInMillis()<calendar1.getTimeInMillis())
             holder.timeUp.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        else holder.timeUp.getPaint().setFlags(0);
         calendar12.set(item.getYear(),item.getMonth()-1,item.getDay(),item.getToHour(),item.getToMinute(),0);
         if(calendar12.getTimeInMillis()<calendar1.getTimeInMillis())
         holder.timeDown.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        else holder.timeDown.getPaint().setFlags(0);
         holder.timeUp.setText((item.getFromHour()>9?item.getFromHour():("0"+item.getFromHour()))+":"+(item.getFromMinute()>9?item.getFromMinute():"0"+item.getFromMinute()));
         holder.timeDown.setText((item.getToHour()>9?item.getToHour():("0"+item.getToHour()))+":"+(item.getToMinute()>9?item.getToMinute():"0"+item.getToMinute()));
         holder.textView.setText(item.getTheme());

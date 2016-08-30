@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="添加新日程"
-        android:textColor="@android:color/holo_blue_light"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorPrimaryDark"
         android:gravity="center|left"/>
     </LinearLayout>
 </FrameLayout>

@@ -76,7 +76,7 @@
     android:background="@drawable/press"
 
 
-    android:gravity="center|left"
+    android:gravity="center"
     android:textColor="@android:color/holo_red_light"
     android:textSize="20dp"/>
 

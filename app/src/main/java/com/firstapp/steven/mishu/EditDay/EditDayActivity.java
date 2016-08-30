@@ -96,21 +96,21 @@ gridLayout= (LinearLayout) findViewById(R.id.item_click);
                 if(day_item.getYear()!=-1)
                 {
                     edit_day.setTextColor(Color.BLACK);
-                    edit_day.setTextSize(density*10);
+                    edit_day.setTextSize(density*8);
                 }
-            edit_day.setText(day_item.getYear()+" /"+day_item.getMonth()+" /"+day_item.getDay());
+            edit_day.setText(day_item.getYear()+"年"+day_item.getMonth()+"月"+day_item.getDay()+"日");
                 if(day_item.getFromMinute()!=-1&&day_item.getFromHour()!=-1)
                 {
-                    fromTime.setTextSize(10*density);
+                    fromTime.setTextSize(8*density);
                     fromTime.setTextColor(Color.BLACK);
                 }
-            fromTime.setText(day_item.getFromHour()+":"+day_item.getFromMinute());
+            fromTime.setText((day_item.getFromHour()>9?day_item.getFromHour():("0"+day_item.getFromHour()))+":"+(day_item.getFromMinute()>9?day_item.getFromMinute():"0"+day_item.getFromMinute()));
                 if(day_item.getToMinute()!=-1&&day_item.getToHour()!=-1)
                 {
-                    toTime.setTextSize(10*density);
+                    toTime.setTextSize(8*density);
                     toTime.setTextColor(Color.BLACK);
                 }
-            toTime.setText(day_item.getToHour()+":"+day_item.getToMinute());
+            toTime.setText((day_item.getToHour()>9?day_item.getToHour():("0"+day_item.getToHour()))+":"+(day_item.getToMinute()>9?day_item.getFromMinute():"0"+day_item.getToMinute()));
                 if(day_item.isFinish())
                 {   complete.getTextView().setText("已完成");
                     complete.getImageView().setImageDrawable(getResources().getDrawable(R.drawable.ic_action_wancheng));
@@ -137,7 +137,7 @@ gridLayout= (LinearLayout) findViewById(R.id.item_click);
                    @Override
                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 edit_day.setTextColor(Color.BLACK);
-                       edit_day.setTextSize(density*10);
+                       edit_day.setTextSize(density*7);
                        edit_day.setText(i+"年"+(i1+1)+"月"+i2+"日");
                       item.setYear(i);
                        item.setMonth(i1+1);

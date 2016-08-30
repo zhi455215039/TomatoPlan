@@ -39,6 +39,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@android:color/white"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -65,6 +66,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@android:color/white"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -92,6 +94,7 @@ android:textColor="@android:color/black"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@android:color/white"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -113,15 +116,21 @@ android:textColor="@android:color/black"
             android:layout_marginLeft="43dp"/>
 
     </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/line"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/line"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -146,9 +155,15 @@ android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/line"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/line"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -178,7 +193,8 @@ android:textColor="@android:color/black"
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="70dp"
+                android:minHeight="50dp"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -206,7 +222,7 @@ android:textColor="@android:color/black"
                 android:background="@color/line"/>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="150dp"/>
             </LinearLayout>
 
     </ScrollView>
