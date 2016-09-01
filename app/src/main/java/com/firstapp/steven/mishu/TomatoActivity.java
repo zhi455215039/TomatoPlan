@@ -1,6 +1,12 @@
 package com.firstapp.steven.mishu;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,10 +14,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.firstapp.steven.mishu.service.TomatoService;
 import com.firstapp.steven.tomato.ShowTomato;
 import com.firstapp.steven.tomato.Tomato;
 import com.firstapp.steven.tomato.TomatoCalcel;
 import com.firstapp.steven.tomato.TomatoSetting;
+
+import java.util.Calendar;
 
 /**
  * Created by steven on 2016/8/29.
@@ -24,6 +33,8 @@ public class TomatoActivity extends AppCompatActivity {
     FrameLayout.LayoutParams params;
     FrameLayout frameLayout;
     ImageView imageView;
+    TomatoService service;
+    boolean mBound=false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +42,7 @@ public class TomatoActivity extends AppCompatActivity {
         frameLayout= (FrameLayout) findViewById(R.id.tomato_frame);
         tomatoButton= (TomatoButton) findViewById(R.id.tomato_button);
         tomatoButton.setParent(frameLayout);
+        tomatoButton.setActivity(this);
         tomato= new Tomato(TomatoActivity.this);
         showTomato= (ShowTomato) findViewById(R.id.showTomato);
         params= (FrameLayout.LayoutParams) showTomato.getLayoutParams();
@@ -53,7 +65,9 @@ new TomatoSetting(TomatoActivity.this).show();
                 tomato.setVisibility(View.VISIBLE);
                // tomato.startAnim();
                // tomato.startRotate();
-                tomatoButton.startTimer();
+                Intent intent = new Intent(TomatoActivity.this, TomatoService.class);
+                bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+               tomatoButton.startTimer();
             }
         });
         tomatoButton.setOnTomotoButtonOnclick(new TomatoButton.OnTomotoButtonOnclick() {
@@ -72,7 +86,24 @@ new TomatoSetting(TomatoActivity.this).show();
        @Override
        public void onClick() {
            tomatoButton.setClick(!tomatoButton.isClick());
+           if(!tomatoButton.isOk())
+           {
+               Calendar calendar=Calendar.getInstance();
+               SharedPreferences reader=TomatoActivity.this.getSharedPreferences("tomato", Context.MODE_PRIVATE);
+               int all=reader.getInt("allBad",0);
+               int todayTomatoNum= reader.getInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"bad",0);
+               SharedPreferences.Editor    editor=TomatoActivity.this.getSharedPreferences("tomato",Context.MODE_PRIVATE).edit();
+               editor.putInt("allBad",all+1);
+               editor.putInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"bad",todayTomatoNum+1);
+               editor.apply();
+           }
+           try {
+               unbindService(mConnection);
+           }
+           catch (IllegalArgumentException ex)
+           {
 
+           }
 
            showTomato.cancel();
           frameLayout.removeView(tomato);
@@ -126,12 +157,26 @@ new TomatoSetting(TomatoActivity.this).show();
                 @Override
                 public void onClick() {
                     tomatoButton.setClick(!tomatoButton.isClick());
-
+                    if(!tomatoButton.isOk())
+                    {
+                        Calendar calendar=Calendar.getInstance();
+                        SharedPreferences reader=TomatoActivity.this.getSharedPreferences("tomato", Context.MODE_PRIVATE);
+                        int all=reader.getInt("allBad",0);
+                        int todayTomatoNum= reader.getInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"bad",0);
+                        SharedPreferences.Editor    editor=TomatoActivity.this.getSharedPreferences("tomato",Context.MODE_PRIVATE).edit();
+                        editor.putInt("allBad",all+1);
+                        editor.putInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"bad",todayTomatoNum+1);
+                        editor.apply();
+                    }
 
                     showTomato.cancel();
                     frameLayout.removeView(tomato);
                     //  frameLayout.requestLayout();
                     tomatoButton.end();
+                    if(mBound) {
+                        unbindService(mConnection);
+                        mBound=false;
+                    }
                     imageView.setVisibility(View.VISIBLE);
                     finish();
                 }
@@ -139,5 +184,28 @@ new TomatoSetting(TomatoActivity.this).show();
         }
         else
         super.onBackPressed();
+    }
+    private ServiceConnection mConnection = new ServiceConnection(){
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            TomatoService.TomatoBinder binder= (TomatoService.TomatoBinder) iBinder;
+            service=binder.getLocalService();
+            mBound=true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
+    public void setNotificationText(String s)
+    {
+        if(service!=null)
+        service.setTextView(s);
+    }
+
+    public ServiceConnection getmConnection() {
+        return mConnection;
     }
 }

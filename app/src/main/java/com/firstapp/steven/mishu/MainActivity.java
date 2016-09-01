@@ -30,6 +30,7 @@ import com.firstapp.steven.mishu.data.ImportantDay;
 import com.firstapp.steven.mishu.note.NoteActivity;
 import com.firstapp.steven.mishu.service.BirthdayNotificationService;
 import com.firstapp.steven.mishu.service.ImportantNotificationService;
+import com.firstapp.steven.tomato.TomatoStatisticsActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -102,12 +103,14 @@ myCalendarView= (MyCalendarView) findViewById(R.id.my_calendar);
                         Intent intent2=new Intent(MainActivity.this, EditDayActivity.class);
                         startActivityForResult(intent2,2234);
                         break;
-                    case R.id.menu_news:
-                        Intent intent3=new Intent(MainActivity.this, NoteActivity.class);
-                        startActivity(intent3);
-                    case R.id.menu_popular:
+
+                    case R.id.tomato:
                         Intent intent4=new Intent(MainActivity.this,TomatoActivity.class);
                         startActivity(intent4);
+                        break;
+                    case R.id.tomato_statistics:
+                        Intent intent3=new Intent(MainActivity.this, TomatoStatisticsActivity.class);
+                        startActivity(intent3);
                         break;
                 }
                 drawerLayout.closeDrawers();

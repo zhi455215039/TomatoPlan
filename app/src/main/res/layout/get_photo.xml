@@ -15,8 +15,9 @@
         android:background="@color/line"/>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:scaleType="fitCenter"
+        android:padding="20dp"
         android:src="@drawable/fanqie1"/>
     <View
         android:layout_width="match_parent"

@@ -70,11 +70,13 @@ holder.delete_button.setAnimEnd(new MyButton.OnMyButtomAnimEnd() {
     public void onEnd() {
         if(holder.delete_button.isChecked()&&BirthdayActivity.removeList!=null)
         {
+
             if(!BirthdayActivity.removeList.contains(birthday))
                 BirthdayActivity.removeList.add(birthday);
 
         }
-        else {
+        else if(!holder.delete_button.isChecked()){
+           // Toast.makeText(context, "没有选中", Toast.LENGTH_SHORT).show();
             if(BirthdayActivity.removeList.contains(birthday))
                 BirthdayActivity.removeList.remove(birthday);
         }

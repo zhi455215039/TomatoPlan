@@ -74,7 +74,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:windowSoftInputMode="stateHidden|adjustPan"
+        <activity android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:name=".TomatoActivity">
             <intent-filter>
                 <action android:name="com.firstapp.steven.mushu.tomatoactivity" />
@@ -82,6 +83,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:windowSoftInputMode="stateHidden|adjustPan"
+            android:name="com.firstapp.steven.tomato.TomatoStatisticsActivity">
+            <intent-filter>
+                <action android:name="com.firstapp.steven.mushu.tomatoStatisticsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <service android:name=".service.TomatoService"/>
     </application>
 
 </manifest>

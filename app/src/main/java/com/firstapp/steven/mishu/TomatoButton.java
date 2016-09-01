@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.graphics.RectF;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 import com.firstapp.steven.tomato.TomatoDialog;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,17 +38,15 @@ public class TomatoButton extends TextView {
    private Paint paint;
    private float density;
     private Path path;
-    private PathMeasure pathMeasure;
-    private Handler handler;
+
     private boolean click=false;
     private ValueAnimator alpha;
-    private Path whitePath;
+
     private OnTomotoButtonOnclick onTomotoButtonOnclick;
     private int minutes=1;
-    private int seconds=minutes*60;
-    private Timer timer;
-    private Runnable computeTime;
-    private TimerTask timerTask;
+    private int seconds=Integer.MAX_VALUE;
+
+
     private float pathLength;
     private int restMinutes=5;
     private FrameLayout parent;
@@ -54,10 +55,18 @@ public class TomatoButton extends TextView {
     private boolean ring=true;
     private  MediaPlayer  mMediaPlayer;
     private boolean ok=false;
-    private Paint pen;
+
     private int wid,hei;
     private String text;
     private Vibrator  vibrator;
+    private Handler handler;
+    private RectF rectF;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences reader;
+    private Calendar calendar;
+private TomatoActivity activity;
+    private com.firstapp.steven.Timer timer;
+
     public TomatoButton(Context context) {
         this(context,null);
     }
@@ -77,74 +86,88 @@ public class TomatoButton extends TextView {
         circleColor=Color.rgb(253,0,6);
         paint.setColor(circleColor);
         paint.setStyle(Paint.Style.STROKE);
-        pen=new Paint(Paint.ANTI_ALIAS_FLAG);
-        pen.setColor(Color.WHITE);
-        pen.setTextSize(30*getResources().getDisplayMetrics().density);
-        text="开始";
+
+       setText("开始");
         density=context.getResources().getDisplayMetrics().density;
         paint.setStrokeWidth(5*density);
         path=new Path();
-        whitePath=new Path();
-        handler=new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                 if(msg.what==1)
-                 {
+        rectF=new RectF();
 
-                     int m=seconds/60;
-                     int s=seconds%60;
-                     if(seconds>=0)
-                     text=(m>9?m:("0"+m))+":"+(s>9?s:("0"+s));
-                     else {
-                         m=(restMinutes*60+seconds)/60;
-                         s=(restMinutes*60+seconds)%60;
-                         text="休息中"+" "+(m>9?m:("0"+m))+":"+(s>9?s:("0"+s));
-                         circleColor=Color.rgb(20,140,10);
-                     }
-                     if(seconds==0)
-                     {
-                         ok=true;
-                         if(ring)
-                             try {
-                                 startAlarm();
-                             } catch (IOException e) {
-                                 e.printStackTrace();
-                             }
-                         if(viber)
-                         {
-                               vibrator = (Vibrator)getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                             long [] pattern = {100,400,100,400}; // 停止 开启 停止 开启
-                             vibrator.vibrate(pattern,2);
+        calendar=Calendar.getInstance();
+handler=new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        if(msg.what==1){
+            seconds--;
+            if(alpha.isRunning())
+                alpha.end();
+            setAlpha(1f);
+        int m=seconds/60;
+        int s=seconds%60;
+        if(seconds>=0)
+        {
+            setText((m>9?m:("0"+m))+":"+(s>9?s:("0"+s)));
+            activity.setNotificationText((m>9?m:("0"+m))+":"+(s>9?s:("0"+s)));
+        }
+        else {
+            m=(restMinutes*60+seconds)/60;
+            s=(restMinutes*60+seconds)%60;
+            setText("休息中"+"\n"+(m>9?m:("0"+m))+":"+(s>9?s:("0"+s)));
+            activity.setNotificationText("休息中"+"\n"+(m>9?m:("0"+m))+":"+(s>9?s:("0"+s)));
+            circleColor=Color.rgb(20,140,10);
+        }
+        if(seconds==0)
+        {
+            ok=true;
+            if(ring)
+                try {
+                    startAlarm();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            if(viber)
+            {
+                vibrator = (Vibrator)getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                long [] pattern = {100,400,100,400}; // 停止 开启 停止 开启
+                vibrator.vibrate(pattern,2);
 
-                         }
-                        parent.setBackgroundColor(getResources().getColor(R.color.tomato_end));
-                         new TomatoDialog(getContext(),TomatoButton.this).show();
-
-                     }
-                     if(seconds==-restMinutes*60)
-                     {
-                         end();
-                     }
-                     float fract=(float)(minutes*60-seconds)/(minutes*60);
-                     pathMeasure.getSegment(0,fract*pathLength,whitePath,true);
-                     invalidate();
-                 }
             }
-        };
-        timerTask=new TimerTask() {
-            @Override
-            public void run() {
-              seconds--;
+            parent.setBackgroundColor(getResources().getColor(R.color.tomato_end));
+            new TomatoDialog(getContext(),TomatoButton.this).show();
+            SharedPreferences   reader=getContext().getSharedPreferences("tomato",Context.MODE_PRIVATE);
+            int all=reader.getInt("allGood",0);
+            int mon=reader.getInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1),0);
+            int week=reader.getInt(calendar.get(Calendar.YEAR)+""+calendar.get(Calendar.WEEK_OF_YEAR),0);
+            int todayMinute=reader.getInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"min",0);
+            int allMinute=reader.getInt("allMin",0);
+            int todayTomatoNum= reader.getInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"good",0);
+            SharedPreferences.Editor    editor=getContext().getSharedPreferences("tomato",Context.MODE_PRIVATE).edit();
+            editor.putInt("allGood",all+1);
+            editor.putInt("allMin",allMinute+minutes);
 
-                Message message=new Message();
-                message.what=1;
 
-                handler.sendMessage(message);
-            }
-        };
-        timer=new Timer();
+            ////////////////////
+            editor.putInt(calendar.get(Calendar.YEAR)+""+calendar.get(Calendar.WEEK_OF_YEAR),week+1);
+            editor.putInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1),mon+1);
+            editor.putInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"min",todayMinute+minutes);
+            editor.putInt(calendar.get(Calendar.YEAR)+""+(calendar.get(Calendar.MONTH)+1)+""+calendar.get(Calendar.DAY_OF_MONTH)+"good",todayTomatoNum+1);
+            editor.apply();
 
-        pathMeasure=new PathMeasure();
+        }
+        if(seconds==-restMinutes*60)
+        {
+end();
+
+            activity.unbindService(activity.getmConnection());
+        }
+
+
+        invalidate();
+    }}
+};
+
+    timer=new com.firstapp.steven.Timer(handler);
+
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -175,19 +198,19 @@ public class TomatoButton extends TextView {
         wid=getMeasuredWidth();
         hei=getMeasuredHeight();
         path.addCircle(getMeasuredWidth()/2,getMeasuredHeight()/2,getMeasuredWidth()/2-5*density, Path.Direction.CW);
-        pathMeasure.setPath(path,true);
-        pathLength=pathMeasure.getLength();
+       // pathMeasure.setPath(path,true);
+
+        rectF.set(wid/2-(getMeasuredWidth()/2-5*density),hei/2-(getMeasuredWidth()/2-5*density),wid/2+(getMeasuredWidth()/2-5*density),hei/2+(getMeasuredWidth()/2-5*density));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-canvas.drawPath(path,paint);
+canvas.drawCircle(getMeasuredWidth()/2,getMeasuredHeight()/2,getMeasuredWidth()/2-5*density,paint);
         paint.setColor(Color.WHITE);
-      float len= pen.measureText(text,0,text.length());
-        float h=Math.abs(pen.descent()+pen.ascent());
-        canvas.drawText(text,(wid-len)/2,(hei+h)/2,pen);
-        canvas.drawPath(whitePath,paint);
+
+       if(seconds!=Integer.MAX_VALUE)
+       canvas.drawArc(rectF,0,seconds>=0?(360*((float)(minutes*60-seconds))/(minutes*60)):360,false,paint);
         paint.setColor(circleColor);
     }
     public interface OnTomotoButtonOnclick{
@@ -207,56 +230,40 @@ canvas.drawPath(path,paint);
     }
     public void startTimer()
     {
+  ok=false;
         SharedPreferences reader=getContext().getSharedPreferences("tomatoSetting",Context.MODE_PRIVATE);
         minutes=reader.getInt("worktime",25);
 
         restMinutes=reader.getInt("resttime",5);
+
         viber=reader.getBoolean("vibr",true);
         ring=reader.getBoolean("ring",true);
+        seconds=minutes*60;
+        timer.start();
         circleColor=Color.rgb(253,0,6);
         parent.setBackgroundColor(getResources().getColor(R.color.tomato_background));
-        timer=new Timer();
-        timerTask.cancel();
-        seconds=minutes*60;
-        timerTask=new TimerTask() {
-            @Override
-            public void run() {
-                seconds--;
-                Bundle bundle=new Bundle();
-                bundle.putInt("minutes",seconds/60);
-                bundle.putInt("seconds",seconds%60);
-                Message message=new Message();
-                message.what=1;
-                message.setData(bundle);
-                handler.sendMessage(message);
-            }
-        };
-timer.schedule(timerTask,0,1000);
-        alpha.cancel();
+        if(alpha.isRunning())
+
+        alpha.end();
         setAlpha(1f);
+        alpha.cancel();
     }
 
-    public Timer getTimer() {
-        return timer;
-    }
+
     public void end()
     {
 
-        timer.purge();
-        timer.cancel();
+       if(timer!=null)
+          timer.stop();
+        setText("开始");
         alpha.start();
         circleColor=Color.rgb(253,0,6);
         parent.setBackgroundColor(getResources().getColor(R.color.tomato_background));
         if(parent.getChildAt(3)!=null)
         parent.getChildAt(3).setVisibility(INVISIBLE);
-        whitePath=new Path();
+        seconds=Integer.MAX_VALUE;
         invalidate();
-        text="开始";
-    }
-    public void onTimeEnd()
-    {
-        timer.purge();
-        timer.cancel();
+
     }
 
     public void setParent(FrameLayout parent) {
@@ -296,5 +303,9 @@ timer.schedule(timerTask,0,1000);
 
     public Vibrator getVibrator() {
         return vibrator;
+    }
+
+    public void setActivity(TomatoActivity activity) {
+        this.activity = activity;
     }
 }

@@ -225,6 +225,8 @@ ValueAnimator animator1=ValueAnimator.ofFloat(0,measure.getLength());
                 public void onAnimationEnd(Animator animator) {
 setChecked(false);
                     invalidate();
+                    if(animEnd!=null)
+                        animEnd.onEnd();
                 }
 
                 @Override

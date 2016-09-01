@@ -221,8 +221,7 @@ updateData(0);
             case R.id.yes:
 
                 save();
-                setResult(RESULT_OK,null);
-                finish();
+
                 break;
             case android.R.id.home:
                 finish();
@@ -241,7 +240,7 @@ updateData(0);
 else if(fromTime.getText().toString().equals(""))
             Toast.makeText(this,"开始时间不可为空",Toast.LENGTH_SHORT).show();
 else if(toTime.getText().toString().equals(""))
-            Toast.makeText(this,"日期不可为空",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"结束时间不可为空",Toast.LENGTH_SHORT).show();
 else
         {
         item.setTheme(edit_title.getText().toString());
@@ -342,7 +341,10 @@ else
 
 
            }
-       } }
+            setResult(RESULT_OK,null);
+            finish();
+       }
+    }
 
     public void alert()
     {

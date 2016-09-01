@@ -13,18 +13,15 @@
             android:id="@+id/importantday"
             android:icon="@drawable/jinianri"
             android:title="纪念日" />
-        <item
-            android:id="@+id/menu_news"
-            android:icon="@drawable/ic_action_beiwang"
-            android:title="我的备忘" />
+
         </group>
     <group>
         <item
-            android:id="@+id/menu_popular"
+            android:id="@+id/tomato"
             android:icon="@drawable/tomato"
             android:title="番茄时钟" />
         <item
-            android:id="@+id/menu_photos_nearby"
+            android:id="@+id/tomato_statistics"
             android:icon="@drawable/ic_action_tongji"
             android:title="番茄统计" />
 
